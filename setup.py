@@ -7,7 +7,7 @@ import sys
 # fine tuning.
 buildOptions = dict(
     packages=["sys", 'pygame'],
-    include_files=["controller", "model", "global_variables.py", "Images", 'online_multiplayer'],
+    include_files=["controller", "model", "global_variables.py", 'online_multiplayer'],
     build_exe=".\\build\\server-v0.3",
     excludes=[]
 )

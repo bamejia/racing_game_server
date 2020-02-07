@@ -1,5 +1,5 @@
 # from win32api import GetSystemMetrics
-import pygame
+# import pygame
 
 
 # window variables
