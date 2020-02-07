@@ -28,7 +28,6 @@ class GameModel:
             ready (bool):       for online multiplayer, whether all players are connected or not
             num_players (int):  number of players in the game
         """
-
         self.vehicles = vehicles
         self.player = player
         self.player2 = player2
@@ -91,6 +90,7 @@ class GameModel:
             self.player2.health -= 10
 
         self.player.score += 1  # player gains points for every frame they are alive
+
 
     @staticmethod
     def from_json(json_string):     # converts object from JSON file to GameModel Object

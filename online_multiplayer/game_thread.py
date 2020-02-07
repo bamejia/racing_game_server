@@ -12,11 +12,9 @@ def game_thread(game):
         if game_model.ready:
             enemy_input(game_model.vehicles)
             if False in all_player_inputs:
-                print("Game has ended")
                 lock.release()
                 break
             if has_ended[0]:
-                print("Game h4s ended")
                 lock.release()
                 break
             # print(self.game_model.player.cur_x_vel, self.game_model.player.reaction_x_vel, self.game_model.player.cur_y_vel, self.game_model.player.reaction_y_vel)

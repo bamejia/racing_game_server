@@ -7,6 +7,7 @@ from online_multiplayer.game_thread import game_thread
 import json
 from model.direction import Dir
 import global_variables as gv
+
 import sys
 # import win32api as api
 # import win32process as proc
@@ -52,6 +53,8 @@ def server():
                     print("NOT PLAYER")
                     games[game_id][2].acquire()
                     has_ended_ref[0] = True
+                    print("Game has ended")
+                    client_connection.sendall("none".encode())
                     games[game_id][2].release()
                 else:
                     player_input = Dir[player_input]
@@ -112,29 +115,29 @@ def server():
     while True:
         client_connection, client_ip = s.accept()
         print("Connected to:", client_ip)
-        # print(client_connection)
-
         game_id = player_id // 2
         player_index = player_id % 2
         if player_id % 2 == 0:
             has_ended_ref = [False]
             game_model = GameModel(ready=False, num_players=2)
             games[game_id] = (game_model, [Dir.NONE, Dir.NONE], Lock(), has_ended_ref)
-            print("Creating game, waiting for player 2")
+            print(f"Creating game: {game_id}, waiting for player 2")
             start_new_thread(game_thread, (games[game_id],))
         else:
-            try:
+            if game_id in games:
+                print("Game Start!")
                 games[game_id][0].ready = True
-            except:
+            else:
                 player_id += 1
+                game_id = player_id // 2
                 player_index = player_id % 2
                 games[game_id] = (GameModel(ready=False, num_players=2), [Dir.NONE, Dir.NONE], Lock(), [False])
-            print("Game Start!")
+                print(f"Creating game: {game_id}, waiting for player 2")
+                start_new_thread(game_thread, (games[game_id],))
         start_new_thread(client_connection_thread, (client_connection, player_index, game_id, games[game_id][3]))
-
         player_id += 1
         if player_id >= 999999999:
-            print("After 999,999,999 interations, the server stops")
+            print("After 999,999,999 iterations, the server stops")
             break
 
 server()
