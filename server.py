@@ -56,6 +56,7 @@ def server():
                     print("Game has ended")
                     client_connection.sendall("none".encode())
                     games[game_id][2].release()
+                    break
                 else:
                     player_input = Dir[player_input]
 
