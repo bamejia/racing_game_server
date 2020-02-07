@@ -1,16 +1,11 @@
 import socket
 from model.game_model import GameModel
-from model.objct_to_dict_recursion import get_json
 from _thread import *
 from threading import Lock
 from online_multiplayer.game_thread import game_thread
 import json
 from model.direction import Dir
 import global_variables as gv
-
-import sys
-# import win32api as api
-# import win32process as proc
 
 
 def server():

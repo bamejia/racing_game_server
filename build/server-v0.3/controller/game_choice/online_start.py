@@ -1,5 +1,4 @@
 import pygame
-from view.game_view import GameView
 from controller.player_text_input import player_text_input2
 from model.game_model import GameModel, check_if_player_is_alive
 from controller.player_key_input import player_input, player_input2
