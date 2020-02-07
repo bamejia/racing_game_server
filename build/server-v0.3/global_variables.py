@@ -87,7 +87,7 @@ ENEMY_MAX_HANDLING = 2
 ENEMY_STARTING_HEALTH = PLAYER_STARTING_HEALTH
 
 # car types
-MOVEMENT_PATTERNS = (
+CAR_TYPES = (
     "player",
     "player2",
     "random",

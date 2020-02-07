@@ -67,9 +67,9 @@ def server():
                     game[1][player_index] = player_input
                     output_vehicles = []
                     for vehicle in game[0].vehicles:
-                        # output_vehicles.append(vehicle.movement_pattern)
-                        for i, movement in enumerate(gv.MOVEMENT_PATTERNS):
-                            if movement == vehicle.movement_pattern:
+                        # output_vehicles.append(vehicle.car_type)
+                        for i in gv.CAR_TYPES:
+                            if gv.CAR_TYPES[i] == vehicle.car_type:
                                 output_vehicles.append(i)
                                 break
                         output_vehicles.append(vehicle.x)

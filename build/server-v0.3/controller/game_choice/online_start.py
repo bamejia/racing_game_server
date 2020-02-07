@@ -51,7 +51,7 @@ def online_start(window, create_server=False):
             events = pygame.event.get()
             all_player_inputs[client.player_index] = player_input(events)
             if game_model is not None and game_model.ready:
-                # if len(game_model.vehicles) > 1 and game_model.player2.movement_pattern == MOVEMENT_PATTERNS[1]:
+                # if len(game_model.vehicles) > 1 and game_model.player2.car_type == CAR_TYPES[1]:
                 #     player_input2(game_model.vehicles[1], events)
 
                 game_model = client.communicate(all_player_inputs[client.player_index])

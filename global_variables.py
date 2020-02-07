@@ -1,5 +1,5 @@
 # from win32api import GetSystemMetrics
-# import pygame
+import pygame
 
 
 # window variables
@@ -25,7 +25,7 @@ AUTHOR_FONT = None
 BUTTON_TEXTS = (
     "Single Player",
     "Local 2 Player",
-    "Online 2 Player",
+    "Online MultiPlayer",
     "Exit"
 )
 BUTTON_TEXT_SIZE = 75
@@ -87,17 +87,43 @@ ENEMY_MAX_HANDLING = 2
 ENEMY_STARTING_HEALTH = PLAYER_STARTING_HEALTH
 
 # car types
-MOVEMENT_PATTERNS = (
-    "player",
-    "player2",
-    "random",
-    "side to side",
-    "up and down",
-    "diagonal",
-    "tracker",
-    "static",
-    "speed demon"
-)
+CAR_TYPES = {
+    0: "player",
+    1: "player2",
+    2: "random",
+    3: "side to side",
+    4: "up and down",
+    5: "diagonal",
+    6: "tracker",
+    7: "static",
+    8: "speed demon"
+}
+
+# car lengths and widths
+CAR_SIZES = {
+    CAR_TYPES[0]: (PLAYER_WIDTH, PLAYER_LENGTH),
+    CAR_TYPES[1]: (PLAYER_WIDTH, PLAYER_LENGTH),
+    CAR_TYPES[2]: (ENEMY_WIDTH, ENEMY_LENGTH),
+    CAR_TYPES[3]: (ENEMY_WIDTH, ENEMY_LENGTH),
+    CAR_TYPES[4]: (ENEMY_WIDTH, ENEMY_LENGTH),
+    CAR_TYPES[5]: (ENEMY_WIDTH, ENEMY_LENGTH),
+    CAR_TYPES[6]: (ENEMY_WIDTH, ENEMY_LENGTH),
+    CAR_TYPES[7]: (ENEMY_WIDTH, ENEMY_LENGTH),
+    CAR_TYPES[8]: (ENEMY_WIDTH, ENEMY_LENGTH),
+}
+
+# image paths
+CAR_IMAGE_PATHS = {
+    CAR_TYPES[0]: "Images/car/red car.png",
+    CAR_TYPES[1]: "Images/car/blue car.png",
+    CAR_TYPES[2]: "Images/car/purple car.png",
+    CAR_TYPES[3]: "Images/car/orange car.png",
+    CAR_TYPES[4]: "Images/car/yellow car.png",
+    CAR_TYPES[5]: "Images/car/pink car.png",
+    CAR_TYPES[6]: "Images/car/black car.png",
+    CAR_TYPES[7]: "Images/car/green car.png",
+    CAR_TYPES[8]: "Images/car/white car.png"
+}
 
 # power up types
 POWER_UPS = (

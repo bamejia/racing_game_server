@@ -39,11 +39,11 @@ def check_boundary(vehicle):
     elif vehicle.x + vehicle.w > WINDOW_W:
         vehicle.x = WINDOW_W - vehicle.w
 
-    # print(vehicle.movement_pattern)
+    # print(vehicle.car_type)
     if vehicle.y < -vehicle.l - 1:
         # print("ENEMY")
         vehicle.y = -vehicle.l - 1
-    if vehicle.y < 0 and 'player' in vehicle.movement_pattern:
+    if vehicle.y < 0 and 'player' in vehicle.car_type:
         # print("PLAYEr")
         vehicle.y = 0
     if BOTTOM_BORDER:

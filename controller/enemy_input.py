@@ -14,20 +14,20 @@ def choose_pattern(enemy, vehicles):
 
     if random.randint(0, 80) == 0:
 
-        """ depending on the movement_pattern of the car, will choose respective method """
-        if enemy.movement_pattern == "random":
+        """ depending on the car_type of the car, will choose respective method """
+        if enemy.car_type == "random":
             random_pattern(enemy)
-        elif enemy.movement_pattern == "side to side":
+        elif enemy.car_type == "side to side":
             side_to_side_pattern(enemy)
-        elif enemy.movement_pattern == "up and down":
+        elif enemy.car_type == "up and down":
             up_and_down_pattern(enemy)
-        elif enemy.movement_pattern == "diagonal":
+        elif enemy.car_type == "diagonal":
             diagonal_pattern(enemy)
-        elif enemy.movement_pattern == "tracker":
+        elif enemy.car_type == "tracker":
             tracker_pattern(enemy, vehicles)
-        elif enemy.movement_pattern == "static":
+        elif enemy.car_type == "static":
             static_pattern(enemy)
-        elif enemy.movement_pattern == "speed demon":
+        elif enemy.car_type == "speed demon":
             speed_demon_pattern(enemy)
 
     """ keeps cars on the road """
@@ -103,7 +103,7 @@ def tracker_pattern(enemy, vehicles):
     choice = random.randint(0, 1)
     player = vehicles[0]
     player2 = None
-    if vehicles[1].movement_pattern == "player2":
+    if vehicles[1].car_type == "player2":
         player2 = vehicles[1]
         if choice == 1:
             player = player2
