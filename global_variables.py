@@ -1,6 +1,12 @@
 # from win32api import GetSystemMetrics
+from enum import Enum
+
 import pygame
 
+
+# game running speed
+GAME_FPS = 60
+ACCEL_SPEED_MULTIPLIER = 120 / GAME_FPS
 
 # window variables
 WINDOW_NAME = "Racing Game"
@@ -22,12 +28,12 @@ TITLE_FONT = None
 AUTHOR_TEXT = "by bamxmejia"
 AUTHOR_TEXT_SIZE = 80
 AUTHOR_FONT = None
-BUTTON_TEXTS = (
-    "Single Player",
-    "Local 2 Player",
-    "Online MultiPlayer",
-    "Exit"
-)
+# BUTTON_TEXTS = (
+#     "Single Player",
+#     "Local 2 Player",
+#     "Online MultiPlayer",
+#     "Exit"
+# )
 BUTTON_TEXT_SIZE = 75
 BUTTON_FONT = None
 
@@ -61,68 +67,69 @@ DARK_GREEN = (0, 100, 40)
 TAN = (255, 195, 155)
 
 # traffic variables
-TRAFFIC_SPEED = 3  # 3 or 2
-FRICTION = 1
-REACTION_FRICTION = 1
-FRICTION_MARKER = 12
-REACTION_SPEED_MAX = 12
+TRAFFIC_SPEED = 3 * ACCEL_SPEED_MULTIPLIER  # 3 or 2
+FRICTION = 0.083 * ACCEL_SPEED_MULTIPLIER
+REACTION_FRICTION = 0.083 * ACCEL_SPEED_MULTIPLIER
+FRICTION_MARKER = 0  # round(12 / ACCEL_SPEED_MULTIPLIER)
+REACTION_SPEED_MAX = 12 * ACCEL_SPEED_MULTIPLIER
 
 # player defaults
 # PLAYER_WIDTH = round(WINDOW_W / 32)
 PLAYER_WIDTH = 25
 PLAYER_LENGTH = 54
-PLAYER_ACCELERATION = 1
-PLAYER_MAX_SPEED = 5
-PLAYER_HANDLING = 1
-PLAYER_MAX_HANDLING = 4
+PLAYER_ACCELERATION = 0.115 * ACCEL_SPEED_MULTIPLIER
+PLAYER_MAX_SPEED = 4.5 * ACCEL_SPEED_MULTIPLIER
+PLAYER_HANDLING = 0.15 * ACCEL_SPEED_MULTIPLIER
+PLAYER_MAX_HANDLING = 4 * ACCEL_SPEED_MULTIPLIER
 PLAYER_STARTING_HEALTH = 1000
 
 # enemy defaults
 ENEMY_WIDTH = PLAYER_WIDTH
 ENEMY_LENGTH = PLAYER_LENGTH
-ENEMY_ACCELERATION = 1
-ENEMY_MAX_SPEED = 4
-ENEMY_HANDLING = 1
-ENEMY_MAX_HANDLING = 2
+ENEMY_ACCELERATION = 0.115 * ACCEL_SPEED_MULTIPLIER
+ENEMY_MAX_SPEED = 4 * ACCEL_SPEED_MULTIPLIER
+ENEMY_HANDLING = 0.15 * ACCEL_SPEED_MULTIPLIER
+ENEMY_MAX_HANDLING = 2 * ACCEL_SPEED_MULTIPLIER
 ENEMY_STARTING_HEALTH = PLAYER_STARTING_HEALTH
 
+
 # car types
-CAR_TYPES = {
-    0: "player",
-    1: "player2",
-    2: "random",
-    3: "side to side",
-    4: "up and down",
-    5: "diagonal",
-    6: "tracker",
-    7: "static",
-    8: "speed demon"
-}
+class CarType(Enum):
+    PLAYER_1 = "player 1"
+    PLAYER_2 = "player 2"
+    RANDOM = "random"
+    SIDE_TO_SIDE = "side to side"
+    UP_AND_DOWN = "up and down"
+    DIAGONAL = "diagonal"
+    TRACKER = "tracker"
+    STATIC = "static"
+    SPEED_DEMON = "speed demon"
+
 
 # car lengths and widths
 CAR_SIZES = {
-    CAR_TYPES[0]: (PLAYER_WIDTH, PLAYER_LENGTH),
-    CAR_TYPES[1]: (PLAYER_WIDTH, PLAYER_LENGTH),
-    CAR_TYPES[2]: (ENEMY_WIDTH, ENEMY_LENGTH),
-    CAR_TYPES[3]: (ENEMY_WIDTH, ENEMY_LENGTH),
-    CAR_TYPES[4]: (ENEMY_WIDTH, ENEMY_LENGTH),
-    CAR_TYPES[5]: (ENEMY_WIDTH, ENEMY_LENGTH),
-    CAR_TYPES[6]: (ENEMY_WIDTH, ENEMY_LENGTH),
-    CAR_TYPES[7]: (ENEMY_WIDTH, ENEMY_LENGTH),
-    CAR_TYPES[8]: (ENEMY_WIDTH, ENEMY_LENGTH),
+    CarType.PLAYER_1: (PLAYER_WIDTH, PLAYER_LENGTH),
+    CarType.PLAYER_2: (PLAYER_WIDTH, PLAYER_LENGTH),
+    CarType.RANDOM: (ENEMY_WIDTH, ENEMY_LENGTH),
+    CarType.SIDE_TO_SIDE: (ENEMY_WIDTH, ENEMY_LENGTH),
+    CarType.UP_AND_DOWN: (ENEMY_WIDTH, ENEMY_LENGTH),
+    CarType.DIAGONAL: (ENEMY_WIDTH, ENEMY_LENGTH),
+    CarType.TRACKER: (ENEMY_WIDTH, ENEMY_LENGTH),
+    CarType.STATIC: (ENEMY_WIDTH, ENEMY_LENGTH),
+    CarType.SPEED_DEMON: (ENEMY_WIDTH, ENEMY_LENGTH),
 }
 
 # image paths
 CAR_IMAGE_PATHS = {
-    CAR_TYPES[0]: "Images/car/red car.png",
-    CAR_TYPES[1]: "Images/car/blue car.png",
-    CAR_TYPES[2]: "Images/car/purple car.png",
-    CAR_TYPES[3]: "Images/car/orange car.png",
-    CAR_TYPES[4]: "Images/car/yellow car.png",
-    CAR_TYPES[5]: "Images/car/pink car.png",
-    CAR_TYPES[6]: "Images/car/black car.png",
-    CAR_TYPES[7]: "Images/car/green car.png",
-    CAR_TYPES[8]: "Images/car/white car.png"
+    CarType.PLAYER_1: "Images/car/red car.png",
+    CarType.PLAYER_2: "Images/car/blue car.png",
+    CarType.RANDOM: "Images/car/purple car.png",
+    CarType.SIDE_TO_SIDE: "Images/car/orange car.png",
+    CarType.UP_AND_DOWN: "Images/car/yellow car.png",
+    CarType.DIAGONAL: "Images/car/pink car.png",
+    CarType.TRACKER: "Images/car/black car.png",
+    CarType.STATIC: "Images/car/green car.png",
+    CarType.SPEED_DEMON: "Images/car/white car.png"
 }
 
 # power up types
@@ -133,4 +140,4 @@ POWER_UPS = (
 )
 
 # for testing
-BOTTOM_BORDER = False
+BOTTOM_BORDER = True

@@ -4,9 +4,9 @@ import global_variables as gv
 
 # final variables
 acceleration_marker = 0
-acceleration_MOD = 10
+acceleration_MOD = 1  # round(10 / gv.ACCEL_SPEED_MULTIPLIER)
 handling_marker = 0
-handling_MOD = 6
+handling_MOD = 1  # round(6 / gv.ACCEL_SPEED_MULTIPLIER)
 
 
 def vehicle_movement_handler(vehicle, other_vehicles):
@@ -88,11 +88,11 @@ def collision_and_boundary_handler(vehicle, other_vehicles):
         old_collided_x = collided_vehicle.x
         old_collided_y = collided_vehicle.y
 
-        collided_vehicle.reaction_x_vel = int(round(vehicle.cur_x_vel * collided_reaction_ratio))
-        collided_vehicle.reaction_y_vel = int(round((vehicle.cur_y_vel - gv.TRAFFIC_SPEED) * collided_reaction_ratio))
+        collided_vehicle.reaction_x_vel = vehicle.cur_x_vel * collided_reaction_ratio
+        collided_vehicle.reaction_y_vel = (vehicle.cur_y_vel - gv.TRAFFIC_SPEED) * collided_reaction_ratio
 
-        vehicle.reaction_x_vel = int(round(collided_vehicle.cur_x_vel * vehicle_reaction_ratio))
-        vehicle.reaction_y_vel = int(round((collided_vehicle.cur_y_vel - gv.TRAFFIC_SPEED) * vehicle_reaction_ratio))
+        vehicle.reaction_x_vel = collided_vehicle.cur_x_vel * vehicle_reaction_ratio
+        vehicle.reaction_y_vel = (collided_vehicle.cur_y_vel - gv.TRAFFIC_SPEED) * vehicle_reaction_ratio
 
         extra_var = 1
 
@@ -141,7 +141,7 @@ def collision_and_boundary_handler(vehicle, other_vehicles):
     cb.check_boundary(vehicle)
 
     if not cb.check_on_road(vehicle):  # Check if off road to add more friction
-        vehicle.off_road_on_input_y_vel(1)
+        vehicle.off_road_on_input_y_vel(0.5)
         # vehicle.reaction_y_vel += 1
 
 

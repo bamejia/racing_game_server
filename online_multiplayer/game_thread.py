@@ -2,6 +2,7 @@ import pygame
 from model.game_model import check_if_player_is_alive
 from controller.enemy_input import enemy_input
 import time
+from global_variables import GAME_FPS
 
 
 def game_thread(game):
@@ -31,4 +32,4 @@ def game_thread(game):
         else:
             lock.release()
         # print(clock.get_fps())
-        clock.tick(120)
+        clock.tick(GAME_FPS)

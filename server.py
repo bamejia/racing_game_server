@@ -67,14 +67,14 @@ def server():
                     game[1][player_index] = player_input
                     output_vehicles = []
                     for vehicle in game[0].vehicles:
-                        # output_vehicles.append(vehicle.car_type)
-                        for i in gv.CAR_TYPES:
-                            if gv.CAR_TYPES[i] == vehicle.car_type:
+                        for i, c_type in enumerate(gv.CarType):
+                            if c_type == vehicle.car_type:
                                 output_vehicles.append(i)
                                 break
-                        output_vehicles.append(vehicle.x)
-                        output_vehicles.append(vehicle.y)
+                        output_vehicles.append(round(vehicle.x))
+                        output_vehicles.append(round(vehicle.y))
                         output_vehicles.append(vehicle.health)
+                        # output_vehicles.append(8)
                         # output_vehicles.append(gv.WINDOW_W)
                         # output_vehicles.append(gv.WINDOW_L+gv.PLAYER_LENGTH)
                         # output_vehicles.append(1000)
@@ -87,9 +87,9 @@ def server():
                         print("Game has ended")
                         client_connection.sendall("none".encode())
                         break
-                    x = client_connection.send(json.dumps(output_vehicles).encode())
-                    # highest = max(highest, x)
-                    # print(highest)
+                    x = client_connection.send(json.dumps(output_vehicles, separators=(',', ':')).encode())
+                    highest = max(highest, x)
+                    print(highest)
                 else:
                     print("No game found")
                     client_connection.sendall("none".encode())
